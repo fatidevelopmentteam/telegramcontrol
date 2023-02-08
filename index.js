@@ -1,9 +1,5 @@
-const http = require("http");
-const express = require("express");
-const cors = require("cors");
-const app = express();
-const port = process.env.PORT || 3000;
-//-----
+const functions = require("firebase-functions");
+
 const WebSocket = require("ws");
 const { writeFile } = require("./DBTools");
 const database = require("./history.json");
@@ -36,15 +32,26 @@ wsServer.on("connection", (wsClient) => {
   });
 });
 
+
+
+const http = require("http");
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const port = /* process.env.PORT ||  */3000;
 app.get("/api/gethistory", cors(), (req, res) => {
   res.send(database);
 });
 app.get("/api/getcurrentsession", cors(), (req, res) => {
   res.send(database[database.findIndex((e) => e.id == lastToday)]);
 });
-
 app.listen(port, () => {
   console.log(`Web API is running in port:${port}.`);
 });
 
-module.exports = {};
+exports.app = functions.https.onRequest(app)
+
+
+
+
+

@@ -1,21 +1,27 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "firebase-functions": "^4.2.1",
-    "fs": "^0.0.1-security",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.24.1",
     "http": "^0.0.1-security",
     "ws": "^8.12.0"
-  }
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
 }
